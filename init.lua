@@ -1,8 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 local set = vim.o
-set.number = true
+set.number = true -- show line number
 set.relativenumber = true
+set.clipboard="unnamed" -- use system clipboard
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
