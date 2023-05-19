@@ -1,3 +1,4 @@
+-- colors
 return {
 	{
 		"catppuccin/nvim",
