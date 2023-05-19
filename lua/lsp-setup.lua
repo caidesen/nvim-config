@@ -44,7 +44,8 @@ end
 -- 需要通用配置的server
 local common_servers = {
 	"jsonls",
-	"lua_ls"
+	"lua_ls",
+	"tsserver",
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

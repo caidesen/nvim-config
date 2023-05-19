@@ -7,5 +7,8 @@
   "nerdtree-git-plugin": { "branch": "master", "commit": "e1fe727127a813095854a5b063c15e955a77eafb" },
   "null-ls.nvim": { "branch": "main", "commit": "08bb00c7c2cd58c72e02cf54e4b9cbfe14b03e09" },
   "nvim-lspconfig": { "branch": "master", "commit": "30a232052b3e1c0c51d190d5f5a12ad9b42c5ebc" },
+  "nvim-treesitter": { "branch": "master", "commit": "102f1b2f55575f0a2f18be92eafc0e7142024ad1" },
+  "nvim-treesitter-context": { "branch": "master", "commit": "c8f3a62c64bf6f9fed11260a424207f780505f83" },
+  "persistence.nvim": { "branch": "main", "commit": "c814fae5c37aa0aba9cd9da05df6e52b88d612c3" },
   "which-key.nvim": { "branch": "main", "commit": "5a6c954a5a46023c19acc03a8b6d7c3e57964fc5" }
 }
