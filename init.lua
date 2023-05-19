@@ -23,3 +23,9 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 vim.cmd.colorscheme("catppuccin")
+
+-- load nvim session
+require("start")
+
+-- load keymap
+require("keymap")
