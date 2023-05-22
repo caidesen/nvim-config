@@ -16,7 +16,7 @@ return {
 				" width"
 				let g:NERDTreeWinSize = 27
 				let g:NERDTreeShowLineNumbers=1
-				" mini 
+				" mini
 				let g:NERDTreeMinimalMenu=1
 
 
@@ -59,6 +59,7 @@ return {
 				-- type zz
 				vim.cmd("normal zz")
 			end
+
 			-- create a cmd for this
 			vim.cmd("command NerdSmartLocated lua NerdSmartLocated()")
 		end,

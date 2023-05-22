@@ -3,8 +3,7 @@ vim.g.maplocalleader = " "
 local set = vim.o
 set.number = true -- show line number
 set.relativenumber = true
-set.clipboard="unnamed" -- use system clipboard
-
+set.clipboard = "unnamed" -- use system clipboard
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

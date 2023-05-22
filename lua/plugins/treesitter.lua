@@ -23,7 +23,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("nvim-treesitter.configs").setup({
- 				ensure_installed = {"html", "css", "vim", "lua", "javascript", "typescript", "tsx"},
+				ensure_installed = { "html", "css", "vim", "lua", "javascript", "typescript", "tsx" },
 				matchup = {
 					enable = true, -- mandatory, false will disable the whole extension
 				},
@@ -53,6 +53,6 @@ return {
 					-- termcolors = {} -- table of colour name strings
 				},
 			})
-		end
+		end,
 	},
 }

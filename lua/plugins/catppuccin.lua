@@ -2,10 +2,9 @@
 return {
 	{
 		"catppuccin/nvim",
-		name="catppuccin",
+		name = "catppuccin",
 		config = function()
-			require("catppuccin").setup({
-			})
+			require("catppuccin").setup({})
 		end,
 	},
 }
