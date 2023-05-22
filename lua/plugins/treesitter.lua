@@ -23,7 +23,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "html", "css", "vim", "lua", "javascript", "typescript", "tsx" },
+				ensure_installed = { "html", "css", "vim", "lua", "javascript", "typescript", "tsx", "vue" },
 				matchup = {
 					enable = true, -- mandatory, false will disable the whole extension
 				},
@@ -44,6 +44,9 @@ return {
 					-- because it's buggy
 					enable = false,
 				},
+				autotag = {
+					enable = true,
+				},
 				rainbow = {
 					enable = true,
 					-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -54,5 +57,12 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		event = "VeryLazy",
+		config = function ()
+			require("nvim-ts-autotag").setup()
+		end
 	},
 }
