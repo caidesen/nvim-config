@@ -2,13 +2,13 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
-		config = function ()
-			require'gitsigns'.setup()
-		end
+		config = function()
+			require("gitsigns").setup()
+		end,
 	},
 	{
 		"tpope/vim-fugitive",
 		event = "VeryLazy",
-		cmd="Git"
+		cmd = "Git",
 	},
 }
