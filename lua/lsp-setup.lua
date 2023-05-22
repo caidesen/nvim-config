@@ -1,3 +1,4 @@
+local util = require("lspconfig.util")
 local nvim_lsp = require("lspconfig")
 local configs = require("lspconfig.configs")
 
@@ -12,6 +13,8 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"lua_ls",
 		"jsonls",
+		"tsserver",
+		"volar",
 	},
 })
 
@@ -130,4 +133,33 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.buf.format({ async = true })
 		end, opts)
 	end,
+})
+
+local function get_typescript_server_path(root_dir)
+	local global_ts = "/opt/homebrew/lib/node_modules/typescript/lib"
+	-- Alternative location if installed as root:
+	-- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
+	local found_ts = ""
+	local function check_dir(path)
+		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
+		if util.path.exists(found_ts) then
+			return path
+		end
+	end
+	if util.search_ancestors(root_dir, check_dir) then
+		return found_ts
+	else
+		return global_ts
+	end
+end
+-- custom vue lsp server
+nvim_lsp.volar.setup({
+	on_new_config = function(new_config, new_root_dir)
+		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+	end,
+	flags = {
+		allow_incremental_sync = false,
+		debounce_text_changes = 500,
+	},
+	capabilities = capabilities,
 })
