@@ -1,6 +1,5 @@
 -- 文件浏览器
 return {
-	{ "Xuyuanp/nerdtree-git-plugin", event = "VeryLazy" },
 	{
 		"preservim/nerdtree",
 		cmd = { "NERDTreeClose", "NERDTreeToggle", "NERDTree", "NERDTreeFind", "NerdSmartLocated" },
