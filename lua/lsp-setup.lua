@@ -17,6 +17,7 @@ require("mason-lspconfig").setup({
 		"volar",
 		"cssls",
 		"html",
+		"gopls",
 	},
 })
 
@@ -27,6 +28,7 @@ local common_servers = {
 	"tsserver",
 	"cssls",
 	"html",
+	"gopls",
 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
