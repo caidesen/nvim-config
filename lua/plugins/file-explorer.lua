@@ -1,4 +1,4 @@
--- 文件浏览器
+-- file-explorer
 return {
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -13,8 +13,11 @@ return {
 			vim.g.loaded_netrwPlugin = 1
 			vim.opt.termguicolors = true
 			require("nvim-tree").setup({
+				view = {
+					width = { max = 40 },
+				},
 				filters = {
-					custom = { "^\\.git$" },
+					custom = { "^\\.git$" }, -- hidden .git directory
 				},
 			})
 		end,
