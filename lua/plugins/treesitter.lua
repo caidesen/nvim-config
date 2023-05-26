@@ -21,9 +21,20 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
+		dependencies = { "windwp/nvim-ts-autotag" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "html", "css", "vim", "lua", "javascript", "typescript", "tsx", "vue" },
+				ensure_installed = {
+					"html",
+					"css",
+					"vim",
+					"lua",
+					"javascript",
+					"typescript",
+					"tsx",
+					"vue",
+					"scss",
+				},
 				matchup = {
 					enable = true, -- mandatory, false will disable the whole extension
 				},
@@ -56,13 +67,31 @@ return {
 					-- termcolors = {} -- table of colour name strings
 				},
 			})
+			vim.lsp.handlers["textDocument/publishDiagnostics"] =
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+					underline = true,
+					virtual_text = {
+						spacing = 5,
+						severity_limit = "Warning",
+					},
+					update_in_insert = true,
+				})
 		end,
 	},
-	{
-		"windwp/nvim-ts-autotag",
-		event = "VeryLazy",
-		config = function ()
-			require("nvim-ts-autotag").setup()
-		end
-	},
+	-- {
+	-- 	"windwp/nvim-ts-autotag",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("nvim-ts-autotag").setup()
+	-- 		vim.lsp.handlers["textDocument/publishDiagnostics"] =
+	-- 			vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	-- 				underline = true,
+	-- 				virtual_text = {
+	-- 					spacing = 5,
+	-- 					severity_limit = "Warning",
+	-- 				},
+	-- 				update_in_insert = true,
+	-- 			})
+	-- 	end,
+	-- },
 }
