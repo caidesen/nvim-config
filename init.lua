@@ -4,6 +4,18 @@ local set = vim.o
 set.number = true -- show line number
 set.relativenumber = true
 set.clipboard = "unnamed" -- use system clipboard
+set.encoding = "utf8"
+set.termguicolors = true
+set.ts = 2
+set.sts = 2
+set.sw = 2
+set.hlsearch = true
+set.autoindent = true
+set.smartindent = true
+set.mouse = "a"
+set.clipboard = "unnamed"
+set.modifiable = true
+set.smartcase = true
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
