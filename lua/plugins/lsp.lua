@@ -51,41 +51,44 @@ return {
 					["<C-c>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					["<Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
-						elseif cmp.visible() then
+						-- if luasnip.expand_or_jumpable() then
+						-- 	luasnip.expand_or_jump()
+						-- elseif cmp.visible() then
+						if cmp.visible() then
 							cmp.confirm({ select = true })
 						else
 							fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
 						end
 					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
+					-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+					-- 	if luasnip.jumpable(-1) then
+					-- 		luasnip.jump(-1)
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "luasnip", priority = 100 },
-					{ name = "nvim_lsp", priority = 90 },
-					{
-						name = "buffer",
-						priority = 80,
-						max_item_count = 3,
-						keyword_length = 5,
-					},
-					{
-						name = "path",
-						priority = 80,
-						max_item_count = 3,
-						keyword_length = 3,
-					},
-					{ name = "nvim_lsp_signature_help" },
-					{ name = "nvim_lua" },
-				}, {
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "path" },
 					{ name = "buffer" },
+					-- { name = "luasnip", priority = 100 },
+					-- { name = "nvim_lsp", priority = 90 },
+					-- {
+					-- 	name = "buffer",
+					-- 	priority = 80,
+					-- 	max_item_count = 3,
+					-- 	keyword_length = 5,
+					-- },
+					-- {
+					-- 	name = "path",
+					-- 	priority = 80,
+					-- 	max_item_count = 3,
+					-- 	keyword_length = 3,
+					-- },
+					-- { name = "nvim_lsp_signature_help" },
+					-- { name = "nvim_lua" },
 				}),
 			})
 
