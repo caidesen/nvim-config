@@ -2,13 +2,10 @@ local util = require("lspconfig.util")
 local nvim_lsp = require("lspconfig")
 local configs = require("lspconfig.configs")
 
-
--- disable diagnostic in insert mode, 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    update_in_insert = false,
-  }
-)
+-- disable diagnostic in insert mode,
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	update_in_insert = false,
+})
 
 require("mason").setup({
 	ui = {
@@ -121,10 +118,10 @@ end
 -- 	capabilities = capabilities,
 -- })
 nvim_lsp.vuels.setup({
-		flags = {
-			allow_incremental_sync = false,
-			debounce_text_changes = 500,
-		},
+	flags = {
+		allow_incremental_sync = false,
+		debounce_text_changes = 500,
+	},
 	settings = {
 		vetur = {
 			completion = {
@@ -145,6 +142,7 @@ nvim_lsp.vuels.setup({
 			},
 			defaultFormatter = {
 				ts = "prettier",
+				js = "prettier",
 			},
 			scriptInitialIndent = false,
 			styleInitialIndent = false,
