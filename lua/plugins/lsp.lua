@@ -131,6 +131,7 @@ return {
 					-- lua代码格式化
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.prettier,
+					null_ls.builtins.code_actions.eslint,
 				},
 			})
 		end,
