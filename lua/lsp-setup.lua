@@ -33,9 +33,9 @@ local common_servers = {
 	"jsonls",
 	"lua_ls",
 	"tsserver",
-	"cssls",
 	"html",
 	"gopls",
+	"tailwindcss",
 	-- "vuels",
 }
 
@@ -154,6 +154,19 @@ nvim_lsp.vuels.setup({
 			style = true,
 			templateProps = true,
 			interpolation = true,
+		},
+	},
+})
+nvim_lsp.cssls.setup({
+	settings = {
+		css = {
+			validate = false,
+		},
+		less = {
+			validate = false,
+		},
+		scss = {
+			validate = false,
 		},
 	},
 })
