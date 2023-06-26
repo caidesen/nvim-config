@@ -22,6 +22,7 @@ require("mason-lspconfig").setup({
 		"volar", -- vue3
 		"vuels", -- vue2
 		"cssls",
+		"tailwindcss",
 		"html",
 		"gopls",
 	},
