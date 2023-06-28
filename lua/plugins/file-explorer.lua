@@ -16,7 +16,7 @@ return {
 				view = {
 					width = { max = 40 },
 					number = true, -- show line number
-					statusBar = false,
+					-- statusBar = false,
 				},
 				filters = {
 					custom = { "^\\.git$" }, -- hidden .git directory
