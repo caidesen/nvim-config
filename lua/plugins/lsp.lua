@@ -8,6 +8,7 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
 			require("lsp-setup")
@@ -54,13 +55,13 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-c>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.confirm({ select = true })
-						else
-							fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-						end
-					end, { "i", "s", "c" }),
+					-- ["<Tab>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.confirm({ select = true })
+					-- 	else
+					-- 		fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+					-- 	end
+					-- end, { "i", "s", "c" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
