@@ -16,6 +16,7 @@ set.mouse = "a"
 set.clipboard = "unnamed"
 set.modifiable = true
 set.smartcase = true
+set.scrolloff = 4
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
