@@ -72,12 +72,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local opts = { buffer = ev.buf }
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-		vim.keymap.set("n", "gd", function ()
+		vim.keymap.set("n", "gd", function()
 			tele_builtin.lsp_definitions()
 		end, opts)
-	  vim.keymap.set("n", "gr", function ()
+		vim.keymap.set("n", "gr", function()
 			tele_builtin.lsp_references()
-	  end, opts)
+		end, opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
@@ -86,13 +86,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<Leader>wl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, opts)
-		vim.keymap.set("n", "<Leader>D", function ()
+		vim.keymap.set("n", "<Leader>D", function()
 			tele_builtin.type_definition()
 		end, opts)
 		vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<Leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "<Leader>f", function()
-			vim.lsp.buf.format({ async = true })
+			vim.lsp.buf.format({
+				async = true,
+				filter = function(client)
+					-- apply whatever logic you want (in this example, we'll only use null-ls)
+					return client.name == "null-ls"
+				end,
+			})
 		end, opts)
 	end,
 })
@@ -115,16 +121,17 @@ local function get_typescript_server_path(root_dir)
 	end
 end
 -- custom vue lsp server
--- nvim_lsp.volar.setup({
--- 	on_new_config = function(new_config, new_root_dir)
--- 		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
--- 	end,
--- 	flags = {
--- 		allow_incremental_sync = false,
--- 		debounce_text_changes = 500,
--- 	},
--- 	capabilities = capabilities,
--- })
+nvim_lsp.volar.setup({
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+	on_new_config = function(new_config, new_root_dir)
+		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+	end,
+	flags = {
+		allow_incremental_sync = false,
+		debounce_text_changes = 500,
+	},
+	capabilities = capabilities,
+})
 nvim_lsp.vuels.setup({
 	flags = {
 		allow_incremental_sync = false,
@@ -153,14 +160,13 @@ nvim_lsp.vuels.setup({
 				js = "prettier",
 			},
 			scriptInitialIndent = false,
-			styleInitialIndent = false,
-		},
-		validation = {
-			template = true,
-			script = true,
-			style = true,
-			templateProps = true,
-			interpolation = true,
+			validation = {
+				template = true,
+				script = true,
+				style = true,
+				templateProps = true,
+				interpolation = true,
+			},
 		},
 	},
 })

@@ -54,7 +54,7 @@ return {
 				},
 				indent = {
 					-- because it's buggy
-					enable = false,
+					enable = true,
 				},
 				autotag = {
 					enable = true,
