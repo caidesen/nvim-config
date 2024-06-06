@@ -21,7 +21,7 @@ require("mason-lspconfig").setup({
 		"jsonls",
 		"tsserver",
 		"volar", -- vue3
-		"vuels", -- vue2
+		-- "vuels", -- vue2
 		"cssls",
 		"tailwindcss",
 		"html",
@@ -33,11 +33,11 @@ require("mason-lspconfig").setup({
 local common_servers = {
 	"jsonls",
 	"lua_ls",
-	"tsserver",
+	-- "tsserver",
+	"volar",
 	"html",
 	"gopls",
 	"tailwindcss",
-	-- "vuels",
 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -121,55 +121,67 @@ local function get_typescript_server_path(root_dir)
 	end
 end
 -- custom vue lsp server
-nvim_lsp.volar.setup({
-	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-	on_new_config = function(new_config, new_root_dir)
-		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-	end,
-	flags = {
-		allow_incremental_sync = false,
-		debounce_text_changes = 500,
-	},
-	capabilities = capabilities,
+nvim_lsp.tsserver.setup({
+ init_options = {
+    plugins = {
+      {
+        name = '@vue/typescript-plugin',
+        location = '/opt/homebrew/lib/node_modules/@vue/language-server',
+        languages = { 'vue' },
+      },
+    },
+  },
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 })
-nvim_lsp.vuels.setup({
-	flags = {
-		allow_incremental_sync = false,
-		debounce_text_changes = 500,
-	},
-	settings = {
-		vetur = {
-			completion = {
-				autoImport = true,
-				tagCasing = "kebab",
-				useScaffoldSnippets = true,
-			},
-			useWorkspaceDependencies = true,
-			experimental = {
-				templateInterpolationService = true,
-			},
-		},
-		format = {
-			enable = true,
-			options = {
-				useTabs = false,
-				tabSize = 2,
-			},
-			defaultFormatter = {
-				ts = "prettier",
-				js = "prettier",
-			},
-			scriptInitialIndent = false,
-			validation = {
-				template = true,
-				script = true,
-				style = true,
-				templateProps = true,
-				interpolation = true,
-			},
-		},
-	},
-})
+-- nvim_lsp.volar.setup({
+-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+-- 	on_new_config = function(new_config, new_root_dir)
+-- 		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+-- 	end,
+-- 	flags = {
+-- 		allow_incremental_sync = false,
+-- 		debounce_text_changes = 500,
+-- 	},
+-- 	capabilities = capabilities,
+-- })
+-- nvim_lsp.vuels.setup({
+-- 	flags = {
+-- 		allow_incremental_sync = false,
+-- 		debounce_text_changes = 500,
+-- 	},
+-- 	settings = {
+-- 		vetur = {
+-- 			completion = {
+-- 				autoImport = true,
+-- 				tagCasing = "kebab",
+-- 				useScaffoldSnippets = true,
+-- 			},
+-- 			useWorkspaceDependencies = true,
+-- 			experimental = {
+-- 				templateInterpolationService = true,
+-- 			},
+-- 		},
+-- 		format = {
+-- 			enable = true,
+-- 			options = {
+-- 				useTabs = false,
+-- 				tabSize = 2,
+-- 			},
+-- 			defaultFormatter = {
+-- 				ts = "prettier",
+-- 				js = "prettier",
+-- 			},
+-- 			scriptInitialIndent = false,
+-- 			validation = {
+-- 				template = true,
+-- 				script = true,
+-- 				style = true,
+-- 				templateProps = true,
+-- 				interpolation = true,
+-- 			},
+-- 		},
+-- 	},
+-- })
 nvim_lsp.cssls.setup({
 	settings = {
 		css = {

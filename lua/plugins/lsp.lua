@@ -37,7 +37,7 @@ return {
 			cmp.setup({
 				performance = {
 					enabled = true,
-					debounce = 200
+					debounce = 200,
 				},
 				snippet = {
 					-- REQUIRED - you must specify a snippet engine
@@ -115,15 +115,15 @@ return {
 			})
 		end,
 	},
+	-- {
+	-- 	"folke/neodev.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("neodev").setup()
+	-- 	end,
+	-- },
 	{
-		"folke/neodev.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("neodev").setup()
-		end,
-	},
-	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		event = "VeryLazy",
 		config = function()
 			local null_ls = require("null-ls")
@@ -131,8 +131,21 @@ return {
 				sources = {
 					-- lua代码格式化
 					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettier,
-					null_ls.builtins.code_actions.eslint,
+					-- js 代码格式化
+					null_ls.builtins.formatting.prettierd.with({
+						filetypes = {
+							"vue",
+							"javascriptreact",
+							"typescriptreact",
+							"typescript",
+							"javascript",
+							"css",
+							"html",
+							"json",
+							"markdown",
+							"toml",
+						},
+					}),
 				},
 			})
 		end,
