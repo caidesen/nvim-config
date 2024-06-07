@@ -21,7 +21,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
-		dependencies = { "windwp/nvim-ts-autotag", "nvim-treesitter/nvim-treesitter-textobjects" },
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
@@ -34,7 +34,7 @@ return {
 					"tsx",
 					"vue",
 					"scss",
-					"go"
+					"go",
 				},
 				matchup = {
 					enable = true, -- mandatory, false will disable the whole extension
@@ -54,9 +54,6 @@ return {
 				},
 				indent = {
 					-- because it's buggy
-					enable = true,
-				},
-				autotag = {
 					enable = true,
 				},
 				rainbow = {
@@ -89,6 +86,27 @@ return {
 					},
 					update_in_insert = true,
 				})
+		end,
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup({
+				opts = {
+					-- Defaults
+					enable_close = true, -- Auto close tags
+					enable_rename = true, -- Auto rename pairs of tags
+					enable_close_on_slash = false, -- Auto close on trailing </
+				},
+				-- Also override individual filetype configs, these take priority.
+				-- Empty by default, useful if one of the "opts" global settings
+				-- doesn't work well in a specific filetype
+				per_filetype = {
+					["html"] = {
+						enable_close = false,
+					},
+				},
+			})
 		end,
 	},
 }
