@@ -122,16 +122,21 @@ local function get_typescript_server_path(root_dir)
 end
 -- custom vue lsp server
 nvim_lsp.tsserver.setup({
- init_options = {
-    plugins = {
-      {
-        name = '@vue/typescript-plugin',
-        location = '/opt/homebrew/lib/node_modules/@vue/language-server',
-        languages = { 'vue' },
-      },
-    },
-  },
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+	init_options = {
+		plugins = {
+			{
+				name = "@vue/typescript-plugin",
+				location = "/usr/local/lib/node_modules/@vue/language-server",
+				languages = { "vue" },
+			},
+		},
+	},
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+	flags = {
+		allow_incremental_sync = false,
+		debounce_text_changes = 500,
+	},
+	capabilities = capabilities,
 })
 -- nvim_lsp.volar.setup({
 -- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
