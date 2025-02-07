@@ -19,13 +19,12 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"lua_ls",
 		"jsonls",
-		"tsserver",
+		"ts_ls", -- typescript
 		"volar", -- vue3
-		-- "vuels", -- vue2
 		"cssls",
 		"tailwindcss",
 		"html",
-		"gopls",
+		"gopls", -- golang lsp
 	},
 })
 
@@ -33,7 +32,7 @@ require("mason-lspconfig").setup({
 local common_servers = {
 	"jsonls",
 	"lua_ls",
-	-- "tsserver",
+	-- "ts_ls",
 	"volar",
 	"html",
 	"gopls",
@@ -103,25 +102,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local function get_typescript_server_path(root_dir)
-	local global_ts = "/opt/homebrew/lib/node_modules/typescript/lib"
-	-- Alternative location if installed as root:
-	-- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
-	local found_ts = ""
-	local function check_dir(path)
-		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
-		if util.path.exists(found_ts) then
-			return path
-		end
-	end
-	if util.search_ancestors(root_dir, check_dir) then
-		return found_ts
-	else
-		return global_ts
-	end
-end
 -- custom vue lsp server
-nvim_lsp.tsserver.setup({
+nvim_lsp.ts_ls.setup({
 	init_options = {
 		plugins = {
 			{
@@ -138,55 +120,6 @@ nvim_lsp.tsserver.setup({
 	},
 	capabilities = capabilities,
 })
--- nvim_lsp.volar.setup({
--- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
--- 	on_new_config = function(new_config, new_root_dir)
--- 		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
--- 	end,
--- 	flags = {
--- 		allow_incremental_sync = false,
--- 		debounce_text_changes = 500,
--- 	},
--- 	capabilities = capabilities,
--- })
--- nvim_lsp.vuels.setup({
--- 	flags = {
--- 		allow_incremental_sync = false,
--- 		debounce_text_changes = 500,
--- 	},
--- 	settings = {
--- 		vetur = {
--- 			completion = {
--- 				autoImport = true,
--- 				tagCasing = "kebab",
--- 				useScaffoldSnippets = true,
--- 			},
--- 			useWorkspaceDependencies = true,
--- 			experimental = {
--- 				templateInterpolationService = true,
--- 			},
--- 		},
--- 		format = {
--- 			enable = true,
--- 			options = {
--- 				useTabs = false,
--- 				tabSize = 2,
--- 			},
--- 			defaultFormatter = {
--- 				ts = "prettier",
--- 				js = "prettier",
--- 			},
--- 			scriptInitialIndent = false,
--- 			validation = {
--- 				template = true,
--- 				script = true,
--- 				style = true,
--- 				templateProps = true,
--- 				interpolation = true,
--- 			},
--- 		},
--- 	},
--- })
 nvim_lsp.cssls.setup({
 	settings = {
 		css = {
